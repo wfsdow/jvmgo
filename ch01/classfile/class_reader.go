@@ -23,14 +23,14 @@ func (self *ClassReader) readUint16() uint16{
 //读取u4数据类型
 func (self *ClassReader) readUint32() uint32{
 	val := binary.BigEndian.Uint32(self.data)
-	self.data = self.data[2:]
+	self.data = self.data[4:]
 	return  val
 }
 
 //读取uint64数据类型
 func (self *ClassReader) readUint64() uint64{
 	val := binary.BigEndian.Uint64(self.data)
-	self.data = self.data[2:]
+	self.data = self.data[8:]
 	return  val
 }
 

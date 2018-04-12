@@ -21,11 +21,13 @@ func readAttributes(reader *ClassReader, cp ConstantPool) []AttributeInfo {
 	for i := range attributes{
 		attributes[i] = readAttribute(reader, cp)
 	}
+	return attributes
 }
 
 //读取一个属性信息
 func readAttribute(reader *ClassReader, cp ConstantPool) AttributeInfo {
-	attrName := reader.readUint16()
+	attrNameIndex := reader.readUint16()
+	attrName := cp.getUtf8(attrNameIndex)
 	attrLen := reader.readUint32()
 	attrInfo := newAttributeInfo(attrName, attrLen, cp)
 	attrInfo.readInfo(reader)

@@ -34,7 +34,9 @@ func (self *ClassFile) read(reader *ClassReader) {
 	//读取字段表
 	self.fields = readMembers(reader, self.constantPool)
 	//读取方法表
-	self.fields = readMembers(reader, self.constantPool)
+	self.methods = readMembers(reader, self.constantPool)
+	//读取属性表
+	self.attributes = readAttributes(reader, self.constantPool)
 }
 
 
@@ -50,7 +52,7 @@ func Parse(classData []byte) (cf *ClassFile, err error){
 		}
 	}()
 
-	cr := &ClassReader{}
+	cr := &ClassReader{classData}
 	cf = &ClassFile{}
 	cf.read(cr)
 	return 
