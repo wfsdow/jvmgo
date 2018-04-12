@@ -23,7 +23,9 @@ type ConstantInfo interface {
 }
 
 func readConstantInfo(reader *ClassReader, cp ConstantPool) ConstantInfo{
+	//读取常量的类型
 	tag := reader.readUint8()
+	//创建对应类型的常量
 	c := newConstantInfo(tag, cp)
 	c.readInfo(reader)
 	return c
